@@ -121,3 +121,21 @@ Simple Guessing Game:
 )
 
 (('win'))
+
+...
+
+Deptype:
+
+Represents a set of values
+
+opers:
+value contained in sets
+set is subset
+set less than, greater than ...
+addition, subtraction, multiplication, division
+union, intersection, negation
+
+
+Ordered Sets vs regular sets (bags)
+
+Flow Typing in Whiley
