@@ -1,0 +1,9 @@
+digraph G {
+"('init')" -> "('play', 'below', x)" [label="('start')"]
+"('play', 'below', x)" -> "('play', 'below', x)" [label="('guess', num[0-[x-1]])"]
+"('play', 'below', x)" -> "('win')" [label="('guess', num[x])"]
+"('play', 'below', x)" -> "('play', 'above', x)" [label="('guess', num[[x+1]-100])"]
+"('play', 'above', x)" -> "('play', 'below', x)" [label="('guess', num[0-[x-1]])"]
+"('play', 'above', x)" -> "('win')" [label="('guess', num[x])"]
+"('play', 'above', x)" -> "('play', 'above', x)" [label="('guess', num[[x+1]-100])"]
+}

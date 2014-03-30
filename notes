@@ -1,0 +1,123 @@
+a game has these elements:
+
+Game Space - the space in which the game is played. Holds game objects
+Objective/Goal - the end state in which the player wants to get to or avoid
+Actions - Capabilities of a player to progress the game state. Can also be forced by the game
+Game State - the set of the states that the game can be a part
+Initial State - the state of the game when first started. Similar to pre-built level. 
+Objects - components of the game in which the player interacts. Lives inside of a game space
+Players - special game objects that represent the user and/or other players
+
+S ---> Play ---> Win
+
+
+
+--------------------------------
+
+A Game is a graph with each node being a different state of the game and each edge being an action taken by the player or something else
+
+
+
+let S be the all possible states of the game
+    this includes everything that the player can do, as well as the state of the board.
+Let A be a transition (function) between states
+Let A be the different actions taken where A is (S0, S1, f(S))
+
+then S_n+1 = A_n(S_n)
+
+Let S_0 represent the initial state
+Let F represent the set of final/end states
+
+if S_n is in F, then the game is over
+
+(state <state>
+       (always <func>)
+       (if <cond> <func>)
+       (action <cond> <func>)
+       (action <cond> <func>)
+       (action <cond> <func>)
+)
+
+cond
+
+(if (x < 5) return 2) => (split (x < 5) 2)
+
+Reverse Computation:
+(if (x < 5) 2)
+(if 2 (x < 5))
+
+(if (or 2 3) 3)
+(if 3 (or 2 3))
+
+(if (and (x < 3) (x > 0)) "yes")
+(if "yes" (and (x < 3) (x > 0)))
+
+...
+
+
+
+Express all game space as a graph
+(get-ins N1) <--> (get-outs N2, N3, N4)
+
+Are graph functions reversable?
+Reversable DFS? BFS?
+
+...
+
+Game Space
+Game State
+Player
+
+Game = Space X State X Player 
+
+...
+
+Different types of functions:
+one-to-one - easy to compute inverse
+many-to-one - reducing function / into
+one-to-many - spliting function / onto
+
+
+
+(state
+	(< a 1) [state1 1 2 3]
+	(> a 1) [state1 1 2 3]
+)
+
+(state1 (n1 n2)
+	(play (num1 num2) (state1 (+ num1 2) num2))
+	(attack (num2) (state2))
+)
+
+(state2 ()
+	(defend () (state1))
+)
+
+(state, 1, 2):
+	(play num) -> (state, 2, num)
+
+('init', num): (play, x[num+2]) -> ('init', x)
+
+S X A(S) X S
+ ...
+Simple Guessing Game:
+('init'): ('start') -> ('play', 'below', randint[0-100])
+('play', 'below', x): ('guess', num[0-[x-1]]) -> ('play', 'below', num)
+('play', 'below', x): ('guess', num[x]) -> ('win')
+('play', 'below', x): ('guess', num[[x+1]-100]) -> ('play', 'above', num)
+('play', 'above', x): ('guess', num[0-[x-1]]) -> ('play', 'below', num)
+('play', 'above', x): ('guess', num[x]) -> ('win')
+('play', 'above', x): ('guess', num[[x+1]-100]) -> ('play', 'above', num)
+('win')
+
+...
+
+(('init') [('start') ('play', 'below', randint[0-100])])
+
+( ('play', y['below'|'above'], x)
+  (('guess', num[0-[x-1]]) -> ('play', 'below', num))
+  (('guess', num[x]) -> ('win'))
+  (('guess', num[[x+1]-100]) -> ('play', 'above', num))
+)
+
+(('win'))

@@ -1,0 +1,13 @@
+Initial:
+
+Play:
+	
+
+
+All pieces can move.
+A knight can move (1, 2)
+A queen can move (x,x) for x in [-8, 8]
+A queen can move (x, -x) for x in [-8, 8]
+
+
+
